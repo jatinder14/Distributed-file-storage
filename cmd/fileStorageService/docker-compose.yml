@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: file_storage
+      DB_SSLMODE: disable
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ../../
+      dockerfile: cmd/fileStorageService/Dockerfile
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db  # Updated to reference the service name 'db'
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: file_storage
+      DB_PORT: 5432
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
