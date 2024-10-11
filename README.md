@@ -10,13 +10,12 @@
 ## To access the docker-compose and docker file 
 2. cd cmd/fileStorageService/
 
+## Running the Application
 
 3. Build and run the application using Docker Compose:
    ```sh
    docker-compose up --build
    ```
-
-## Running the Application
 
 Once the application is running, it will be available at `http://localhost:8080`.
 
